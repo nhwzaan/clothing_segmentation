@@ -40,7 +40,7 @@ def run(imgPath):
 if __name__ == '__main__':
     args = parse_args()
     _, path_save_img = run(args.imgPath)
-    img = Image.open( path_save_img)
+    img = Image.open(path_save_img)
     img.show()
 
 # input_image = 

@@ -24,10 +24,11 @@ def run(img):
     cloth_seg = generate_mask(img, net=net, palette=palette, device=device)
     return cloth_seg
 
-input = input_image
-output = generate_mask(img, net=model, palette=palette, device=device)
-cv2.imshow(input)
-cv2.imshow(output)
+# input_image = 
+# input = input_image
+# output = generate_mask(img, net=model, palette=palette, device=device)
+# cv2.imshow(input)
+# cv2.imshow(output)
 
 
 # Define input and output interfaces

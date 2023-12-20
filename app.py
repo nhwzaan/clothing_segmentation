@@ -4,8 +4,20 @@ import gradio as gr
 from process import load_seg_model, get_palette, generate_mask
 import cv2
 
+import argparse
+
 device = 'cpu'
 
+
+def parse_args():
+
+    parser = argparse.ArgumentParser(description='Run Clothing Segmentation')
+    parser.add_argument('--imgPath', type=str, default='./test.jpg',
+                        help='Path to your image')
+
+
+    args = parser.parse_args()
+    return args
 
 
 def initialize_and_load_models():
@@ -19,10 +31,15 @@ net = initialize_and_load_models()
 palette = get_palette(4)
 
 
-def run(img):
-
+def run(imgPath):
+    img = cv2.imread(imgPath)
     cloth_seg = generate_mask(img, net=net, palette=palette, device=device)
     return cloth_seg
+
+if __name__ == '__main__':
+    args = parse_args()
+    _, path_save_img = run(args.imgPath)
+    cv2.imshow(cv2.imread(path_save_img))
 
 # input_image = 
 # input = input_image

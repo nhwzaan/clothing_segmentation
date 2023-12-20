@@ -143,8 +143,9 @@ def generate_mask(input_image, net, palette, device = 'cpu'):
     cloth_seg = Image.fromarray(output_arr[0].astype(np.uint8), mode='P')
     cloth_seg.putpalette(palette)
     cloth_seg = cloth_seg.resize(img_size, Image.BICUBIC)
-    cloth_seg.save(os.path.join(cloth_seg_out_dir, 'final_seg.png'))
-    return cloth_seg
+    path_save_img = os.path.join(cloth_seg_out_dir, 'final_seg.png')
+    cloth_seg.save(path_save_img)
+    return cloth_seg, path_save_img
 
 
 

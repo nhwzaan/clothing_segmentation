@@ -104,7 +104,8 @@ def generate_mask(input_image, net, palette, device = 'cpu'):
     #img = Image.open(input_image).convert('RGB')
     img = input_image
     img_size = img.size
-    img = img.resize((768, 768), Image.BICUBIC)
+    img = cv2.resize((768, 768), interpolation=cv2.INTER_CUBIC)
+    # img = img.resize((768, 768), Image.BICUBIC)
     image_tensor = apply_transform(img)
     image_tensor = torch.unsqueeze(image_tensor, 0)
 

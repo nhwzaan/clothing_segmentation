@@ -2,7 +2,7 @@ import PIL
 import torch
 import gradio as gr
 from process import load_seg_model, get_palette, generate_mask
-
+import cv2
 
 device = 'cpu'
 
@@ -24,16 +24,22 @@ def run(img):
     cloth_seg = generate_mask(img, net=net, palette=palette, device=device)
     return cloth_seg
 
+input = input_image
+output = generate_mask(img, net=model, palette=palette, device=device)
+cv2.imshow(input)
+cv2.imshow(output)
+
+
 # Define input and output interfaces
-input_image = gr.inputs.Image(label="Input Image", type="pil")
+# input_image = gr.inputs.Image(label="Input Image", type="pil")
 
 # Define the Gradio interface
-cloth_seg_image = gr.outputs.Image(label="Cloth Segmentation", type="pil")
+# cloth_seg_image = gr.outputs.Image(label="Cloth Segmentation", type="pil")
 
-title = "Demo for Cloth Segmentation"
-description = "An app for Cloth Segmentation"
-inputs = [input_image]
-outputs = [cloth_seg_image]
+# title = "Demo for Cloth Segmentation"
+# description = "An app for Cloth Segmentation"
+# inputs = [input_image]
+# outputs = [cloth_seg_image]
 
 
-gr.Interface(fn=run, inputs=inputs, outputs=outputs, title=title, description=description).launch(share=True)
+# gr.Interface(fn=run, inputs=inputs, outputs=outputs, title=title, description=description).launch(share=True)

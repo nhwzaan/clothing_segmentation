@@ -104,6 +104,7 @@ def generate_mask(input_image, net, palette, device = 'cpu'):
     #img = Image.open(input_image).convert('RGB')
     # Old code read image as PIL Image
     img = input_image
+    print(type(img), img)
     img_size = img.shape
     img = cv2.resize(img, (768, 768), interpolation=cv2.INTER_CUBIC)
     # img = img.resize((768, 768), Image.BICUBIC)

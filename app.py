@@ -1,4 +1,5 @@
 import PIL
+from PIL import Image 
 import torch
 import gradio as gr
 from process import load_seg_model, get_palette, generate_mask
@@ -32,14 +33,15 @@ palette = get_palette(4)
 
 
 def run(imgPath):
-    img = cv2.imread(imgPath)
+    img = Image.open(imgPath)
     cloth_seg = generate_mask(img, net=net, palette=palette, device=device)
     return cloth_seg
 
 if __name__ == '__main__':
     args = parse_args()
     _, path_save_img = run(args.imgPath)
-    cv2.imshow(cv2.imread(path_save_img))
+    img = Image.open( path_save_img)
+    img.show()
 
 # input_image = 
 # input = input_image

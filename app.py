@@ -40,8 +40,9 @@ def run(imgPath):
 if __name__ == '__main__':
     args = parse_args()
     _, path_save_img = run(args.imgPath)
-    img = Image.open(path_save_img)
-    img.show()
+    # img = Image.open(path_save_img)
+    cv2.imshow(cv2.imread(path_save_img))
+    
 
 # input_image = 
 # input = input_image

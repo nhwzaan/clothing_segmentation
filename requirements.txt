@@ -1,7 +1,7 @@
 torch
 torchvision
 gradio
-gdown
+gdown==4.6.0
 Pillow
 opencv-python
 numpy

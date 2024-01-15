@@ -146,19 +146,20 @@ def generate_mask(input_image, net, palette, device = 'cpu'):
 
 
 
-def check_or_download_model(file_path):
+def check_or_download_model(file_path, id):
     if not os.path.exists(file_path):
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
-        url = "https://drive.google.com/uc?id=11xTBALOeUkyuaK3l60CpkYHLTmv7k3dY"
-        gdown.download(url, file_path, quiet=False)
+        gdown.download(id=id, output=file_path, quiet=False)
         print("Model downloaded successfully.")
     else:
         print("Model already exists.")
 
 
 def load_seg_model(checkpoint_path, device='cpu'):
+    args = parser.parse_args()
+    
     net = U2NET(in_ch=3, out_ch=4)
-    check_or_download_model(checkpoint_path)
+    check_or_download_model(checkpoint_path, args.id_file_ggdrive)
     net = load_checkpoint(net, checkpoint_path)
     net = net.to(device)
     net = net.eval()
@@ -186,6 +187,7 @@ if __name__ == '__main__':
     parser.add_argument('--image', type=str, help='Path to the input image')
     parser.add_argument('--cuda', action='store_true', help='Enable CUDA (default: False)')
     parser.add_argument('--checkpoint_path', type=str, default='model/cloth_segm.pth', help='Path to the checkpoint file')
+    parser.add_argument('--id_file_ggdrive', type=str, default='1mcr3sydSIEKPlSMin9zZdJqt8fXKYtd5', help='ID File on Google Drive to download')
     args = parser.parse_args()
 
     main(args)
